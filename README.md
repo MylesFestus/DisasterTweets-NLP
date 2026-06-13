@@ -7,9 +7,11 @@
 
 
 ***Acknowledgments***
+
 This dataset was created by the company figure-eight and originally shared on their ‘Data For Everyone’ website here.
 
 ***Data Source***
+
 Tweet source: https://twitter.com/AnyOtherAnnaK/status/629195955506708480
 
 Kaggle source: https://www.kaggle.com/competitions/nlp-getting-started/overview

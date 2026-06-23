@@ -25,87 +25,98 @@ The dataset consists of tweets labeled as:
 
 ***Features***
 
-
-
 Tweet source: https://twitter.com/AnyOtherAnnaK/status/629195955506708480
 
 Kaggle source: https://www.kaggle.com/competitions/nlp-getting-started/overview
 
 ***Project Structure***
 
-*Features
+***Features***
+
 Feature	Description
 id	Unique tweet identifier
 text	Tweet content
 target	Classification label (0 or 1)
-Project Workflow
-1. Text Preprocessing
+
+***Project Workflow***
+
+***1. Text Preprocessing***
 
 The following preprocessing steps were applied:
 
-Lowercasing text
-Removing URLs
-Removing punctuation
-Tokenization
-Stopword removal
-Lemmatization
-Text reconstruction for vectorization
-Example
+- Lowercasing text
+- Removing URLs
+- Removing punctuation
+- Tokenization
+-  Stopword removal
+- Lemmatization
+- Text reconstruction for vectorization
 
-Original Tweet
+***Example***
+
+***Original Tweet***
 
 Our Deeds are the Reason of this #earthquake May ALLAH Forgive us all
 
-Processed Tweet
+***Processed Tweet***
 
 deed reason earthquake may allah forgive u
-2. Feature Engineering
+
+***2. Feature Engineering***
 
 Two vectorization techniques were evaluated:
 
-Count Vectorizer
+***Count Vectorizer***
 
 Converts text into a matrix of word occurrence counts.
 
-TF-IDF Vectorizer
+***TF-IDF Vectorizer***
 
 Computes term importance by weighting words based on frequency within and across documents.
 
-Models Evaluated
-Baseline Models
-Logistic Regression
-Decision Tree Classifier
-Linear Support Vector Classifier (Linear SVC)
-Ensemble Models
-Random Forest Classifier
-XGBoost Classifier
-Model Evaluation
+***Models Evaluated***
+
+**Baseline Models**
+- Logistic Regression
+- Decision Tree Classifier
+- Linear Support Vector Classifier (Linear SVC)
+
+**Ensemble Models**
+
+- Random Forest Classifier
+- XGBoost Classifier
+
+***Model Evaluation***
 
 Models were evaluated using:
 
-Accuracy
-Precision
-Recall
-F1-Score
-Primary Metric
+- Accuracy
+- Precision
+- Recall
+- F1-Score
 
-F1-Score was selected because it balances precision and recall and is suitable for binary classification tasks where class distributions may not be perfectly balanced.
+***Primary Metric***
 
-Hyperparameter Tuning
+**F1-Score** was selected because it balances precision and recall and is suitable for binary classification tasks where class distributions may not be perfectly balanced.
+
+***Hyperparameter Tuning***
 
 GridSearchCV was used to optimize:
 
-Vectorizer Parameters
-max_features
-ngram_range
-Logistic Regression Parameters
-Regularization strength (C)
-Linear SVC Parameters
-Regularization strength (C)
+***Vectorizer Parameters***
+- max_features
+- ngram_range
+
+**Logistic Regression Parameters**
+- Regularization strength (C)
+
+**Linear SVC Parameters**
+- Regularization strength (C)
 
 Cross-validation was performed using 5-fold CV to identify the optimal parameter combination.
 
-Project Structure
+***Project Structure***
+
 DisasterTweets-NLP/
 │
 ├── data/

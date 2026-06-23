@@ -15,3 +15,13 @@ This dataset was created by the company figure-eight and originally shared on th
 Tweet source: https://twitter.com/AnyOtherAnnaK/status/629195955506708480
 
 Kaggle source: https://www.kaggle.com/competitions/nlp-getting-started/overview
+
+***Project Structure***
+
+***Aproaches***
+
+***Classical ML Pipeline***
+- Text processing
+- Feature Extraction
+- Classifier
+- Served via FastAPI

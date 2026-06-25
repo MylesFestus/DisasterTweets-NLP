@@ -18,7 +18,7 @@ The project follows a complete machine learning workflow, including text preproc
 
 
 ***Project Structure***
-
+```
 DisasterTweets-NLP/
 │
 ├── data/
@@ -39,7 +39,7 @@ DisasterTweets-NLP/
 ├── requirements.txt
 ├── README.md
 └── .gitignore
-
+```
 
 ***Data Set***
 

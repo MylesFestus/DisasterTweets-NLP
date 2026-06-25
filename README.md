@@ -16,6 +16,31 @@ This project develops a Natural Language Processing (NLP) pipeline to classify t
 
 The project follows a complete machine learning workflow, including text preprocessing, feature engineering, model comparison, hyperparameter tuning, and final model evaluation.
 
+
+***Project Structure***
+
+DisasterTweets-NLP/
+│
+├── data/
+│   ├─disaster_tweets_test.csv
+│   └── disaster_tweets_train.csv
+│
+├── notebooks/
+│   └── disaster_tweets.ipynb
+│
+├── src/
+│  ├── api.py
+│  ├── preprocessing.py
+│  └── train.py
+│  
+├── models/
+│   └── best_disaster_tweet_model.pkl
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+
+
 ***Data Set***
 
 The dataset consists of tweets labeled as:
@@ -40,101 +65,50 @@ target	Classification label (0 or 1)
 
 ***Project Workflow***
 
-***1. Text Preprocessing***
+1. Data Loading
 
-The following preprocessing steps were applied:
-
+2. Text Preprocessing
 - Lowercasing text
 - Removing URLs
 - Removing punctuation
 - Tokenization
--  Stopword removal
+- Stopword removal
 - Lemmatization
 - Text reconstruction for vectorization
+- 
+3. Text Vectorization
+- Count Vectorizer --> Converts text into a matrix of word occurrence counts.
+- TF-IDF Vectorizer --> Computes term importance by weighting words based on frequency within and across documents.
 
-***Example***
+4. Model Selection (Simple & Ensemble models)
+- LogisticRegression
+- Linear SVM
+- RandomForest
+- DecisionTree
 
-***Original Tweet***
+5. Model Evaluation
+- Precision --> Of tweets predicted, how many were actually disaster?
+- Recall --> Of actual disaster tweets, how many did we catch?
+- F1 Score --> Penalizes low recall and low precision
+- Confusion Matrix --> How well model distinguishes between disaster and non disaster tweets
 
-Our Deeds are the Reason of this #earthquake May ALLAH Forgive us all
+6. Hyperparameter Tunning of best models
 
-***Processed Tweet***
+**Best Parameters found:**
+- model --> LogisticRegression(max_iter=1000)
+- vectorizer --> TfidfVectorizer(max_features=10000)
+- vectorizer__ngram_range(1, 1)
 
-deed reason earthquake may allah forgive u
+***Results***
 
-***2. Feature Engineering***
+The project compares multiple machine learning algorithms and vectorization techniques to identify the best-performing disaster tweet classifier.
 
-Two vectorization techniques were evaluated:
+Typical findings include:
 
-***Count Vectorizer***
-
-Converts text into a matrix of word occurrence counts.
-
-***TF-IDF Vectorizer***
-
-Computes term importance by weighting words based on frequency within and across documents.
-
-***Models Evaluated***
-
-**Baseline Models**
-- Logistic Regression
-- Decision Tree Classifier
-- Linear Support Vector Classifier (Linear SVC)
-
-**Ensemble Models**
-
-- Random Forest Classifier
-- XGBoost Classifier
-
-***Model Evaluation***
-
-Models were evaluated using:
-
-- Accuracy
-- Precision
-- Recall
-- F1-Score
-
-***Primary Metric***
-
-**F1-Score** was selected because it balances precision and recall and is suitable for binary classification tasks where class distributions may not be perfectly balanced.
-
-***Hyperparameter Tuning***
-
-GridSearchCV was used to optimize:
-
-***Vectorizer Parameters***
-- max_features
-- ngram_range
-
-**Logistic Regression Parameters**
-- Regularization strength (C)
-
-**Linear SVC Parameters**
-- Regularization strength (C)
-
-Cross-validation was performed using 5-fold CV to identify the optimal parameter combination.
-
-***Project Structure***
-
-DisasterTweets-NLP/
-│
-├── data/
-│   ├── train.csv
-│   └── test.csv
-│
-├── notebooks/
-│   └── disaster_tweets.ipynb
-│
-├── src/
-│
-├── models/
-│   └── best_disaster_tweet_model.pkl
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
-
+- TF-IDF often outperforms Count Vectorizer.
+- Linear SVC and Logistic Regression generally achieve the highest F1-scores.
+- Tree-based models tend to underperform on sparse text data.
+- Hyperparameter tuning improves model generalization only slightly.
 
 ***Installation***
 
@@ -164,47 +138,34 @@ source .venv/bin/activate
 
 pip install -r requirements.txt
 
-***Running the Project***
 
-Launch Jupyter Notebook:
+***Usage***
 
-jupyter notebook
+data folder directory added to `.gitignore`
 
-Execute the notebook cells to:
+***Download data***
 
-1. Preprocess text
-2. Generate vectorized features
-3. Train machine learning models
-4. Compare model performance
-5. Tune hyperparameters
-6. Save the best-performing model
+***Train the model***
 
-***Results***
+`python src/train.py`
 
-The project compares multiple machine learning algorithms and vectorization techniques to identify the best-performing disaster tweet classifier.
+Saves model as `models/best_disaster_tweet_model.pkl`
 
-Typical findings include:
+***Run the API***
 
-- TF-IDF often outperforms Count Vectorizer.
-- Linear SVC and Logistic Regression generally achieve the highest F1-scores.
-- Tree-based models tend to underperform on sparse text data.
-- Hyperparameter tuning improves model generalization.
+`ùnicorn src.api:app --reload`
 
-Update this section with your final model performance metrics after training.
+***Endpoints***
 
-***Model Persistence***
+- `GET /` - health check
+- `POST /predict` - classify a text
 
-Save the best model:
+`curl -X 'POST' \
+  'http://127.0.0.1:8000/predict' \ -H 'accept: application/json' \ -H 'Content-Type: application/json' \ -d '{
+  "text": "There'\''s an emergency evacuation happening now in the building across the street"}'`
 
-import joblib
+`{"disaster": 1, "probability": 0.9617164890467441}`
 
-joblib.dump(best_model, "best_disaster_tweet_model.pkl")
-
-Load the saved model:
-
-import joblib
-
-model = joblib.load("best_disaster_tweet_model.pkl")
 
 ***Future Improvements***
 
@@ -215,14 +176,6 @@ model = joblib.load("best_disaster_tweet_model.pkl")
 - Real-time Tweet Classification API
 - Deployment using Streamlit or FastAPI
 
-***Notable libraries Used***
-- Python
-- Pandas
-- NumPy
-- Scikit-Learn
-- XGBoost
-- NLTK
-- Joblib
 
 ***Author***
 

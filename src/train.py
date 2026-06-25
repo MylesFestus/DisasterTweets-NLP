@@ -6,7 +6,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import LinearSVC
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score, f1_score, classification_report, confusion_matrix
+from sklearn.metrics import accuracy_score, f1_score, classification_report, confusion_matrix, recall_score, precision_score
 
 from IPython.display import display
 import joblib
@@ -79,11 +79,15 @@ def main():
             y_pred = model.predict(X_test_vec)
 
             accuracy = accuracy_score(y_test, y_pred)
+            precision = precision_score(y_test, y_pred)
+            recall = recall_score(y_test, y_pred)
             f1 = f1_score(y_test, y_pred)
 
             results.append({
                 "Vectorizer": vec_name,
                 "Model": model_name,
+                "Precision": precision,
+                "Recall": recall,
                 "Accuracy": accuracy,
                 "F1_Score": f1
             })

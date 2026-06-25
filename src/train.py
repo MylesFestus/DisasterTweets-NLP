@@ -25,7 +25,7 @@ nltk.download('stopwords')
 def main():
     # Load dataset
     df = pd.read_csv(
-        '/Users/festusattornelson/Documents/Projects/Python_Udemy/Projects/NLP-disastertweets/data/disaster_treets_train.csv')
+        '/Users/festusattornelson/Documents/Projects/Python_Udemy/Projects/NLP-disastertweets/data/disaster_tweets_train.csv')
 
     df = pd.DataFrame({'text': df['text'], 'target': df['target']})
 
@@ -147,12 +147,19 @@ def main():
     best_model = grid_search.best_estimator_
     y_pred_tuned = best_model.predict(X_test)
 
-    final_accuracy = accuracy_score(y_test, y_pred_tuned)
-    final_f1 = f1_score(y_test, y_pred_tuned)
+    # Evaluation metrics
+    final_accuracy = accuracy_score(y_test, y_pred)
+    final_precision = precision_score(y_test, y_pred)
+    final_recall = recall_score(y_test, y_pred)
+    final_f1 = f1_score(y_test, y_pred)
 
     print("\n--- Tuned Model Performance ---")
     print("Accuracy :", final_accuracy)
+    print("Precision :", final_precision)
+    print("Recall :", final_recall)
     print("F1 Score :", final_f1)
+
+
     print("\nClassification Report")
     print(classification_report(y_test, y_pred_tuned))
     print("\nConfusion Matrix")
@@ -161,14 +168,18 @@ def main():
     # --- Comparison ---
     print("\n--- Performance Comparison ---")
     print("Best Baseline Model:")
-    print(f"  Vectorizer: {best_baseline['Vectorizer']}")
-    print(f"  Model: {best_baseline['Model']}")
-    print(f"  Accuracy: {best_baseline['Accuracy']:.4f}")
-    print(f"  F1 Score: {best_baseline['F1_Score']:.4f}")
+    print(f"Vectorizer: {best_baseline['Vectorizer']}")
+    print(f"Model: {best_baseline['Model']}")
+    print(f"Accuracy: {best_baseline['Accuracy']:.4f}")
+    print(f"Precision: {best_baseline['Precision']:.4f}")
+    print(f"Recall: {best_baseline['Recall']:.4f}")
+    print(f"F1 Score: {best_baseline['F1_Score']:.4f}")
 
     print("\nHyperparameter Tuned Model:")
-    print(f"  Accuracy: {final_accuracy:.4f}")
-    print(f"  F1 Score: {final_f1:.4f}")
+    print(f"Accuracy: {final_accuracy:.4f}")
+    print(f"Precision: {final_precision:.4f}")
+    print(f"Recall: {final_recall:.4f}")
+    print(f"F1 Score: {final_f1:.4f}")
 
 
     # save model

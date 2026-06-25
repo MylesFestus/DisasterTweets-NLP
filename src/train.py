@@ -157,6 +157,14 @@ def main():
     print(f"  Accuracy: {final_accuracy:.4f}")
     print(f"  F1 Score: {final_f1:.4f}")
 
+
+    # save model
+
+
+
+
+
+
 if __name__ == "__main__":
     main()
 

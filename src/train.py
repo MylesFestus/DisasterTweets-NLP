@@ -8,8 +8,16 @@ from sklearn.svm import LinearSVC
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score, f1_score, classification_report, confusion_matrix
 
+from IPython.display import display
+import joblib
+from pathlib import Path
 
 from preprocessing import *
+
+
+model_dir = Path("../models")
+model_dir.mkdir(exist_ok=True)
+
 
 nltk.download('stopwords')
 
@@ -127,6 +135,7 @@ def main():
 
     print("\nHyperparameter Tuning Complete.")
     print("Best parameters found: ", grid_search.best_params_)
+    display(pd.DataFrame([grid_search.best_params_]))
     print("Best CV F1 Score: ", grid_search.best_score_)
 
 
@@ -159,7 +168,12 @@ def main():
 
 
     # save model
+    joblib.dump(
+        best_model,
+        model_dir / "best_disaster_tweet_model.pkl"
+    )
 
+    print("\nModel saved successfully!")
 
 
 

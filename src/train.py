@@ -161,9 +161,9 @@ def main():
 
 
     print("\nClassification Report")
-    print(classification_report(y_test, y_pred_tuned))
+    print(classification_report(y_test, y_pred))
     print("\nConfusion Matrix")
-    print(confusion_matrix(y_test, y_pred_tuned))
+    print(confusion_matrix(y_test, y_pred))
 
     # --- Comparison ---
     print("\n--- Performance Comparison ---")

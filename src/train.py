@@ -132,7 +132,7 @@ def main():
         scoring="f1",
         cv=5,
         n_jobs=-1,
-        verbose=0  # Suppress verbose output during grid search for cleaner script execution
+        verbose=0
     )
 
     grid_search.fit(X_train, y_train)

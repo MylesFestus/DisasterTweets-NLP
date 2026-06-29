@@ -67,7 +67,7 @@ target	Classification label (0 or 1)
 - Removing URLs
 - Removing punctuation
 - Tokenization
-- Stopword removal
+- Stopwords removal
 - Lemmatization
 - Text reconstruction for vectorization
  
